@@ -1,10 +1,16 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import EventCard from "@/components/EventCard";
-import SwiperComponent from "@/components/SwiperComponent";
 import React from "react";
 import { dummyEvents } from "@/constants/dummyEvents";
-// some modifications to the code to make it work with the new SwiperComponent and EventCard components
+
+// Load Swiper only on the client — never during server/static build
+const SwiperComponent = dynamic(
+  () => import("@/components/SwiperComponent"),
+  { ssr: false }
+);
+
 function App() {
   return (
     <div className="h-full">
