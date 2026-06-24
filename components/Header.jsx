@@ -27,7 +27,7 @@ const Header = () => {
             alt="logo"
             height={90}
             width={90}
-            layout="responsive"
+            priority
             className="hover-inverse w-full h-auto max-w-[120px] max-h-[120px] py-4"
           />
         </Link>
@@ -87,23 +87,24 @@ const Header = () => {
               <p>Create Event</p>
             </Link>
           ) : null}
-{session ? (
+
+          {session ? (
             <button
-              onClick={() => {}}
-              className=" bg-gradient-to-r from-orange-400 to-teal-600 text-white px-4 py-2 rounded-md font-medium hover:opacity-70"
+              onClick={() => signOut()}
+              className="bg-gradient-to-r from-orange-400 to-teal-600 text-white px-4 py-2 rounded-md font-medium hover:opacity-70"
             >
               Logout
             </button>
           ) : null}
+
           {!session ? (
             <button
-              onClick={() => {}}
-              className=" bg-gradient-to-r from-orange-400 to-teal-600 text-white px-4 py-2 rounded-md font-medium hover:opacity-70"
+              onClick={() => signIn("github")}
+              className="bg-gradient-to-r from-orange-400 to-teal-600 text-white px-4 py-2 rounded-md font-medium hover:opacity-70"
             >
               Log in
             </button>
           ) : null}
-
         </div>
         <div className="flex justify-center items-center gap-4 max-sm:gap-1"></div>
       </div>
