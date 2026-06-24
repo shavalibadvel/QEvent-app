@@ -4,29 +4,29 @@ import "../app/globals.css";
 
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React from "react";
 import { HomeIcon, PersonIcon } from "@radix-ui/react-icons";
 import { CgProfile } from "react-icons/cg";
 import { useSession, signIn, signOut } from "next-auth/react";
 
-import { FaRegHeart } from "react-icons/fa";
 import { TfiTicket } from "react-icons/tfi";
+import { MdOutlineEventNote } from "react-icons/md";
 
 const Header = () => {
-  const [session, setSession] = useState(false);
+  const { data: session } = useSession();
 
   return (
     <nav className="drop-shadow-2xl flex items-center justify-between p-3 border-b border-slate-200 border-spacing-0 bg-slate-100 h-24">
       <div className="hover-inverse flex items-center justify-center gap-2">
         <Link
-          href={"#"}
+          href={"/"}
           className="text-3xl font-bold max-sm:text-2xl bg-gradient-to-r from-orange-400 to-teal-600 bg-clip-text text-transparent"
         >
           <Image
             src={"/images/logo.png"}
             alt="logo"
-            height={90} // Aspect ratio control
-            width={90} // Aspect ratio control
+            height={90}
+            width={90}
             layout="responsive"
             className="hover-inverse w-full h-auto max-w-[120px] max-h-[120px] py-4"
           />
@@ -36,7 +36,7 @@ const Header = () => {
       <div className="flex justify-center items-center gap-4">
         <div className="flex items-center justify-center gap-5 font-semibold max-md:hidden">
           <Link
-            href={"#"}
+            href={"/"}
             className="flex items-center justify-center gap-2 hover:text-primary hover:scale-105 hover:underline-offset-8 hover:underline transition-all"
           >
             <div className="scale-110">
@@ -46,7 +46,7 @@ const Header = () => {
           </Link>
 
           <Link
-            href={"#"}
+            href={"/events"}
             className="flex items-center justify-center gap-2 hover:text-primary hover:scale-105 hover:underline-offset-8 hover:underline transition-all"
           >
             <div className="scale-110">
@@ -56,7 +56,7 @@ const Header = () => {
           </Link>
 
           <Link
-            href={"#"}
+            href={"/artists"}
             className="flex items-center justify-center gap-2 hover:text-primary hover:scale-105 hover:underline-offset-8 hover:underline transition-all"
           >
             <div className="scale-110">
@@ -66,7 +66,7 @@ const Header = () => {
           </Link>
 
           <Link
-            href={"#"}
+            href={"/tags"}
             className="flex items-center justify-center gap-2 hover:text-primary hover:scale-105 hover:underline-offset-8 hover:underline transition-all"
           >
             <div className="scale-110">
@@ -75,7 +75,19 @@ const Header = () => {
             <p>Tags</p>
           </Link>
 
+          {/* Create Event link only when logged in */}
           {session ? (
+            <Link
+              href={"/create-event"}
+              className="flex items-center justify-center gap-2 hover:text-primary hover:scale-105 hover:underline-offset-8 hover:underline transition-all"
+            >
+              <div className="scale-110">
+                <MdOutlineEventNote />
+              </div>
+              <p>Create Event</p>
+            </Link>
+          ) : null}
+{session ? (
             <button
               onClick={() => {}}
               className=" bg-gradient-to-r from-orange-400 to-teal-600 text-white px-4 py-2 rounded-md font-medium hover:opacity-70"
@@ -91,6 +103,7 @@ const Header = () => {
               Log in
             </button>
           ) : null}
+
         </div>
         <div className="flex justify-center items-center gap-4 max-sm:gap-1"></div>
       </div>
