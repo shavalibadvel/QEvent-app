@@ -5,7 +5,7 @@ import EventCard from "@/components/EventCard";
 import React from "react";
 import { dummyEvents } from "@/constants/dummyEvents";
 
-// Load Swiper only on the client — never during server/static build and hydration, to avoid issues with Swiper's window/document
+// Load Swiper only on the client — never during server/static build and hydration, to avoid issues with Swiper's window/document usage
 const SwiperComponent = dynamic(
   () => import("@/components/SwiperComponent"),
   { ssr: false }
